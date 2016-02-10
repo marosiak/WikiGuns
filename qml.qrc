@@ -1,0 +1,15 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>material/Button.qml</file>
+        <file>material/IconButton.qml</file>
+        <file>material/PaperRipple.qml</file>
+        <file>material/PaperShadow.qml</file>
+        <file>json/gunsList.txt</file>
+        <file>json/JSONListModel.qml</file>
+        <file>json/jsonpath.js</file>
+        <file>fonts/Roboto-Medium.ttf</file>
+        <file>icons/menu.png</file>
+        <file>scripts/Main.js</file>
+    </qresource>
+</RCC>
