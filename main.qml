@@ -7,7 +7,7 @@ import "scripts/Main.js" as MainScript
 
 
 Window {
-    id: window1
+    id: mainWindow
     visible: true
     width: 400
     height: 600
@@ -16,6 +16,7 @@ Window {
             source: "/fonts/Roboto-Medium.ttf"
         }
     Item { // main place
+        id: mainPlace
         width: parent.width
         height: parent.height-topBar.height
         anchors.top: topBar.bottom
@@ -26,7 +27,7 @@ Window {
             height: parent.height
             text: "Welcome in my app, thanks for downloading, remember to rate!"
             horizontalAlignment: Text.AlignHCenter
-            font.pointSize: 11
+            font.pointSize: 15
             textFormat: Text.RichText
             wrapMode: Text.WordWrap
             anchors.right: parent.right
@@ -35,6 +36,8 @@ Window {
             anchors.leftMargin: 10
             anchors.top: parent.top
             anchors.topMargin: 25
+            font.family: robotoMedium.name
+            color: "#727272"
         }
     }
     Rectangle { // Top Bar
@@ -152,8 +155,8 @@ Window {
                             MouseArea {
                                 id: mouseAreaxx
                                 anchors.fill: parent
-                                //onClicked: ammoText.text = model.ammo
-                                //onReleased: rectangle1.released()
+                                onClicked: {MainScript.apply(model.name);
+                                box.state = MainScript.openOrClose(box.width, box.state, box.anchors.leftMargin); console.log(MainScript.openOrClose(box.width, box.state, box.anchors.leftMargin))}
                             }
                         }
                     }
@@ -197,13 +200,13 @@ Window {
                             PaperRipple {
                                 id: ripple
                                 radius: 3 * dp
-                                mouseArea: mouseAreaxxx
+                                mouseArea: mA
                                 }
                             MouseArea {
-                                id: mouseAreaxxx
+                                id: mA
                                 anchors.fill: parent
-                                onClicked: MainScript.weapon() //ammoText.text = model.ammo
-                                //onReleased: rectangle1.released()
+                                onClicked: {MainScript.apply(model.name);
+                                box.state = MainScript.openOrClose(box.width, box.state, box.anchors.leftMargin); console.log(MainScript.openOrClose(box.width, box.state, box.anchors.leftMargin))}
                             }
                         }
                     }

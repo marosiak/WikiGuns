@@ -1,6 +1,6 @@
 { "guns": {
     "pistols":[
-    {"name": "Glock-18", "ammo": "10x25mm"},
+    {"name": "Glock-18", "ammo": "10x25mm", "info": "Was did in Austria in 1995 year, length - 186 mm, weights - 624 g"},
     {"name": "Deagle", "ammo": ".50AE"}
     ],
     "rifles":[
