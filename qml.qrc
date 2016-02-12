@@ -11,5 +11,11 @@
         <file>fonts/Roboto-Medium.ttf</file>
         <file>icons/menu.png</file>
         <file>scripts/Main.js</file>
+        <file>imgs/Glock_19.jpg</file>
+        <file>icons/ic_label_outline.png</file>
+        <file>icons/ic_label_white.png</file>
+        <file>icons/ic_send.png</file>
+        <file>imgs/Deagle.jpg</file>
+        <file>imgs/Ak_47.jpg</file>
     </qresource>
 </RCC>

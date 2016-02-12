@@ -1,5 +1,6 @@
 import QtQuick 2.3
 import QtQuick.Window 2.2
+import QtQuick.Controls 1.4
 import "json"
 import "material"
 import "scripts/Main.js" as MainScript
@@ -15,30 +16,75 @@ Window {
             id: robotoMedium
             source: "/fonts/Roboto-Medium.ttf"
         }
-    Item { // main place
+    Flickable { // main place
+        contentWidth: parent.width
+        contentHeight: 800
         id: mainPlace
         width: parent.width
         height: parent.height-topBar.height
         anchors.top: topBar.bottom
         anchors.topMargin: 0
-        Text{
+        Text {
             id: startInfo
+            color: "#727272"
+            font.family: robotoMedium.name
+            anchors.topMargin: 25
+            anchors.top: parent.top
+            anchors.leftMargin: 10
+            anchors.left: parent.left
+            anchors.rightMargin: 10
+            anchors.right: parent.right
+            wrapMode: Text.WordWrap
+            textFormat: Text.RichText
+            font.pointSize: 15
             width: parent.width/1.3
             height: parent.height
-            text: "Welcome in my app, thanks for downloading, remember to rate!"
             horizontalAlignment: Text.AlignHCenter
-            font.pointSize: 15
-            textFormat: Text.RichText
-            wrapMode: Text.WordWrap
-            anchors.right: parent.right
-            anchors.rightMargin: 10
-            anchors.left: parent.left
-            anchors.leftMargin: 10
+            text: "Welcome in my app, thanks for downloading, remember to rate!"
+        }
+        Text {
+            id: mainHeader
             anchors.top: parent.top
             anchors.topMargin: 25
+            textFormat: Text.RichText
+            horizontalAlignment: Text.AlignHCenter
+            width: parent.width
+            height: 35
             font.family: robotoMedium.name
+            font.pointSize: 24
             color: "#727272"
         }
+        Item{
+            id: imageContainer
+            width: parent.width/2.5
+            height: parent.width/2.5
+            anchors.top: mainHeader.bottom
+            anchors.topMargin: 1
+            anchors.horizontalCenter: parent.horizontalCenter
+            Image {
+                id: gunImage
+                width: parent.width
+                height: parent.height
+                fillMode: Image.PreserveAspectFit
+                //
+                anchors.top: mainHeader.bottom
+                anchors.topMargin: 5
+                anchors.horizontalCenter: parent.horizontalCenter
+
+            }
+        }
+            Text {
+                id: genaralInfo
+                width: mainPlace.width
+                anchors.top: parent.top
+                anchors.topMargin: mainHeader.height+gunImage.height+10
+                textFormat: Text.RichText
+                horizontalAlignment: Text.AlignHCenter
+                height: 35
+                font.family: robotoMedium.name
+                font.pointSize: 24
+                color: "#727272"
+            }
     }
     Rectangle { // Top Bar
             id: topBar
@@ -108,6 +154,7 @@ Window {
                 anchors.fill: parent
                 anchors.margins: 5
                 anchors.bottomMargin: 0
+                width: parent.width
 
                 Text{
                     color: "#ffffff"
@@ -137,16 +184,9 @@ Window {
                     section.property: "name"
                     section.criteria: ViewSection.FirstCharacter
                     delegate: Component {
-
-                        Text {
+                        Item{
                             width: parent.width
                             height: 30
-                            horizontalAlignment: Text.AlignHCenter
-                            font.pixelSize: 16
-                            color: "white"
-                            font.family: robotoMedium.name
-                            verticalAlignment: Text.AlignVCenter
-                            text: model.name
                             PaperRipple {
                                 id: ripple
                                 radius: 3 * dp
@@ -155,8 +195,19 @@ Window {
                             MouseArea {
                                 id: mouseAreaxx
                                 anchors.fill: parent
-                                onClicked: {MainScript.apply(model.name);
+                                onClicked: {MainScript.apply(model.name, model.ammo, model.info, model.image);
                                 box.state = MainScript.openOrClose(box.width, box.state, box.anchors.leftMargin); console.log(MainScript.openOrClose(box.width, box.state, box.anchors.leftMargin))}
+                            }
+                            Text {
+                                width: parent.width-25
+                                height: 30
+                                font.pixelSize: 16
+                                color: "white"
+                                font.family: robotoMedium.name
+                                verticalAlignment: Text.AlignVCenter
+                                text: model.name
+                                anchors.left: parent.left
+                                anchors.leftMargin: 36
                             }
                         }
                     }
@@ -188,31 +239,34 @@ Window {
                     section.criteria: ViewSection.FirstCharacter
                     delegate: Component {
 
-                        Text {
+                        Item{
                             width: parent.width
                             height: 30
-                            horizontalAlignment: Text.AlignHCenter
-                            font.pixelSize: 16
-                            color: "white"
-                            font.family: robotoMedium.name
-                            verticalAlignment: Text.AlignVCenter
-                            text: model.name
                             PaperRipple {
                                 id: ripple
                                 radius: 3 * dp
-                                mouseArea: mA
+                                mouseArea: mouseAreaxx
                                 }
                             MouseArea {
-                                id: mA
+                                id: mouseAreaxx
                                 anchors.fill: parent
-                                onClicked: {MainScript.apply(model.name);
+                                onClicked: {MainScript.apply(model.name, model.ammo, model.info, model.image);
                                 box.state = MainScript.openOrClose(box.width, box.state, box.anchors.leftMargin); console.log(MainScript.openOrClose(box.width, box.state, box.anchors.leftMargin))}
                             }
-                        }
+                            Text {
+                                width: parent.width-25
+                                height: 30
+                                font.pixelSize: 16
+                                color: "white"
+                                font.family: robotoMedium.name
+                                verticalAlignment: Text.AlignVCenter
+                                text: model.name
+                                anchors.left: parent.left
+                                anchors.leftMargin: 36
+                            }
                     }
                 }
+            }
         }
     }
-
 }
-

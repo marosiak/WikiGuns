@@ -1,11 +1,11 @@
 { "guns": {
     "pistols":[
-    {"name": "Glock-18", "ammo": "10x25mm", "info": "Was did in Austria in 1995 year, length - 186 mm, weights - 624 g"},
-    {"name": "Deagle", "ammo": ".50AE"}
+    {"name": "Glock-18", "ammo": "10x25mm", "info": "Was did in Austria in 1995 year, length - 186 mm, weights - 624 g", "image": "Glock_19.jpg"},
+    {"name": "Deagle", "ammo": ".50AE", "info": "No info", "image": "Deagle.jpg"}
     ],
     "rifles":[
-    {"name": "AK-47", "ammo": "7.62x39"},
-    {"name": "M4A1", "ammo": "5.56×45mm"}
+    {"name": "AK-47", "ammo": "7.62x39", "info": "No info", "image": "Ak_47.jpg"},
+    {"name": "M4A1", "ammo": "5.56×45mm", "info": "No info", "image": "Ak_47.jpg"}
     ]
     }
 }
