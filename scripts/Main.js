@@ -29,4 +29,5 @@ function apply(Name, Ammo, Info, Image){
     mainHeader.text = qsTr(Name);
     gunImage.source = qsTr("../imgs/"+Image);
     genaralInfo.text = qsTr("General info");
+    genaralInfo_info.text = qsTr(Info);
 }

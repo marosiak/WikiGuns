@@ -24,12 +24,17 @@ Window {
         height: parent.height-topBar.height
         anchors.top: topBar.bottom
         anchors.topMargin: 0
+        Column{
+            id: mainColumn
+            spacing: 2
+            width: parent.width
+            height: parent.height
         Text {
             id: startInfo
             color: "#727272"
             font.family: robotoMedium.name
-            anchors.topMargin: 25
             anchors.top: parent.top
+            anchors.topMargin: 10
             anchors.leftMargin: 10
             anchors.left: parent.left
             anchors.rightMargin: 10
@@ -38,14 +43,14 @@ Window {
             textFormat: Text.RichText
             font.pointSize: 15
             width: parent.width/1.3
-            height: parent.height
+            height: 10
             horizontalAlignment: Text.AlignHCenter
             text: "Welcome in my app, thanks for downloading, remember to rate!"
         }
         Text {
             id: mainHeader
-            anchors.top: parent.top
-            anchors.topMargin: 25
+            anchors.top: startInfo.top
+            anchors.topMargin: 3
             textFormat: Text.RichText
             horizontalAlignment: Text.AlignHCenter
             width: parent.width
@@ -73,19 +78,38 @@ Window {
 
             }
         }
-            Text {
-                id: genaralInfo
-                width: mainPlace.width
-                anchors.top: parent.top
-                anchors.topMargin: mainHeader.height+gunImage.height+10
-                textFormat: Text.RichText
-                horizontalAlignment: Text.AlignHCenter
-                height: 35
-                font.family: robotoMedium.name
-                font.pointSize: 24
-                color: "#727272"
-            }
+        Text {
+            id: genaralInfo
+            width: mainPlace.width
+            anchors.top: imageContainer.bottom
+            anchors.topMargin: 3
+            textFormat: Text.RichText
+            horizontalAlignment: Text.AlignHCenter
+            height: 10
+            font.family: robotoMedium.name
+            font.pointSize: 24
+            color: "#727272"
+        }
+        Text {
+            id: genaralInfo_info
+            width: mainPlace.width-(mainPlace.width/5.5)
+            textFormat: Text.RichText
+            horizontalAlignment: Text.AlignHCenter
+            anchors.top: genaralInfo.bottom
+            anchors.topMargin: 27
+            anchors.left: parent.left
+            anchors.leftMargin: (mainPlace.width/5.5)/2
+            anchors.right: parent.right
+            anchors.rightMargin: (mainPlace.width/5.5)/2
+            height: 20
+            font.family: robotoMedium.name
+            font.pointSize: 12
+            color: "#727272"
+            //color: "#FFFFFF"
+            wrapMode: Text.Wrap
+        }
     }
+}
     Rectangle { // Top Bar
             id: topBar
             width: parent.width
