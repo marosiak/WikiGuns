@@ -30,4 +30,6 @@ function apply(Name, Ammo, Info, Image){
     gunImage.source = qsTr("../imgs/"+Image);
     genaralInfo.text = qsTr("General info");
     genaralInfo_info.text = qsTr(Info);
+    mainColumn.height = Screen.width*2;
+    mainPlace.contentY = 0;
 }

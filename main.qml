@@ -16,9 +16,27 @@ Window {
             id: robotoMedium
             source: "/fonts/Roboto-Medium.ttf"
         }
+    Text {
+        id: startInfo
+        color: "#727272"
+        font.family: robotoMedium.name
+        anchors.top: topBar.bottom
+        anchors.topMargin: 10
+        anchors.leftMargin: 10
+        anchors.left: parent.left
+        anchors.rightMargin: 10
+        anchors.right: parent.right
+        wrapMode: Text.WordWrap
+        textFormat: Text.RichText
+        font.pointSize: 15
+        width: parent.width/1.3
+        height: 10
+        horizontalAlignment: Text.AlignHCenter
+        text: "Welcome in my app, thanks for downloading, remember to rate!"
+    }
     Flickable { // main place
         contentWidth: parent.width
-        contentHeight: 800
+        contentHeight: mainColumn.height+Screen.height
         id: mainPlace
         width: parent.width
         height: parent.height-topBar.height
@@ -28,25 +46,6 @@ Window {
             id: mainColumn
             spacing: 2
             width: parent.width
-            height: parent.height
-        Text {
-            id: startInfo
-            color: "#727272"
-            font.family: robotoMedium.name
-            anchors.top: parent.top
-            anchors.topMargin: 10
-            anchors.leftMargin: 10
-            anchors.left: parent.left
-            anchors.rightMargin: 10
-            anchors.right: parent.right
-            wrapMode: Text.WordWrap
-            textFormat: Text.RichText
-            font.pointSize: 15
-            width: parent.width/1.3
-            height: 10
-            horizontalAlignment: Text.AlignHCenter
-            text: "Welcome in my app, thanks for downloading, remember to rate!"
-        }
         Text {
             id: mainHeader
             anchors.top: startInfo.top
@@ -54,7 +53,6 @@ Window {
             textFormat: Text.RichText
             horizontalAlignment: Text.AlignHCenter
             width: parent.width
-            height: 35
             font.family: robotoMedium.name
             font.pointSize: 24
             color: "#727272"
@@ -85,7 +83,6 @@ Window {
             anchors.topMargin: 3
             textFormat: Text.RichText
             horizontalAlignment: Text.AlignHCenter
-            height: 10
             font.family: robotoMedium.name
             font.pointSize: 24
             color: "#727272"
@@ -101,7 +98,6 @@ Window {
             anchors.leftMargin: (mainPlace.width/5.5)/2
             anchors.right: parent.right
             anchors.rightMargin: (mainPlace.width/5.5)/2
-            height: 20
             font.family: robotoMedium.name
             font.pointSize: 12
             color: "#727272"
@@ -248,7 +244,7 @@ Window {
                 ListView {
                     id: list2
                     width: parent.width
-                    height: parent.height/2
+                    height: parent.height/4
                     boundsBehavior: Flickable.StopAtBounds
                     flickableDirection: Flickable.AutoFlickDirection
                     contentHeight: 69
@@ -258,6 +254,61 @@ Window {
                         source: "gunsList.txt"
                     }
                     model: jsonModel2.model
+                    section.delegate: sectionDelegate
+                    section.property: "name"
+                    section.criteria: ViewSection.FirstCharacter
+                    delegate: Component {
+
+                        Item{
+                            width: parent.width
+                            height: 30
+                            PaperRipple {
+                                id: ripple
+                                radius: 3 * dp
+                                mouseArea: mouseAreaxx
+                                }
+                            MouseArea {
+                                id: mouseAreaxx
+                                anchors.fill: parent
+                                onClicked: {MainScript.apply(model.name, model.ammo, model.info, model.image);
+                                box.state = MainScript.openOrClose(box.width, box.state, box.anchors.leftMargin); console.log(MainScript.openOrClose(box.width, box.state, box.anchors.leftMargin))}
+                            }
+                            Text {
+                                width: parent.width-25
+                                height: 30
+                                font.pixelSize: 16
+                                color: "white"
+                                font.family: robotoMedium.name
+                                verticalAlignment: Text.AlignVCenter
+                                text: model.name
+                                anchors.left: parent.left
+                                anchors.leftMargin: 36
+                            }
+                    }
+                }
+            }
+                Text{
+                    color: "#ffffff"
+                    text: "Heavy Rifles"
+                    width: parent.width
+                    font.bold: true
+                    horizontalAlignment: Text.AlignHCenter
+                    font.pointSize: 17
+                    font.family: robotoMedium.name
+                }
+                ListView {
+                    id: list3
+                    width: parent.width
+                    height: parent.height/2
+                    boundsBehavior: Flickable.StopAtBounds
+                    flickableDirection: Flickable.AutoFlickDirection
+                    contentHeight: 69
+                    JSONListModel {
+                        id: jsonModel3
+                        query: "$.guns.heavy_guns[*]"
+                        source: "gunsList.txt"
+                    }
+                    model: jsonModel3.model
                     section.delegate: sectionDelegate
                     section.property: "name"
                     section.criteria: ViewSection.FirstCharacter

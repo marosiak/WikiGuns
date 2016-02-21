@@ -17,5 +17,9 @@
         <file>icons/ic_send.png</file>
         <file>imgs/Deagle.jpg</file>
         <file>imgs/Ak_47.jpg</file>
+        <file>imgs/M16.jpg</file>
+        <file>imgs/M1911.jpg</file>
+        <file>imgs/RPD.png</file>
+        <file>imgs/MG42.jpg</file>
     </qresource>
 </RCC>
