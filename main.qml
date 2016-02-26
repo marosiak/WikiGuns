@@ -36,7 +36,7 @@ Window {
     }
     Flickable { // main place
         contentWidth: parent.width
-        contentHeight: mainColumn.height+Screen.height
+        //contentHeight: mainColumn.height+Screen.height
         id: mainPlace
         width: parent.width
         height: parent.height-topBar.height
@@ -106,46 +106,6 @@ Window {
         }
     }
 }
-    Rectangle { // Top Bar
-            id: topBar
-            width: parent.width
-            height: 56
-            color: "#03A9F4"
-            anchors.horizontalCenter: parent.horizontalCenter
-            Item {
-                id: itemBar
-                width: parent.height
-                height: parent.height
-                anchors.left: parent.left
-                anchors.leftMargin: 0
-                    Image {
-                        id: imageBar
-                        sourceSize.height: 500
-                        sourceSize.width: 500
-                        fillMode: Image.Stretch
-                        anchors.right: parent.right
-                        anchors.rightMargin: 10
-                        anchors.left: parent.left
-                        anchors.leftMargin: 10
-                        anchors.bottom: parent.bottom
-                        anchors.bottomMargin: 10
-                        anchors.top: parent.top
-                        anchors.topMargin: 10
-                        source: "icons/menu.png"
-                        }
-                        MouseArea {
-                            id: xc
-                            width: parent.width
-                            height: parent.height
-                            onClicked: { box.state = MainScript.openOrClose(box.width, box.state, box.anchors.leftMargin); console.log(MainScript.openOrClose(box.width, box.state, box.anchors.leftMargin))}
-                        }
-                        PaperRipple{
-                            id: ripple
-                            radius: 3 * dp
-                            mouseArea: xc
-                        }
-            }
-    }
     Rectangle {
         id: box
         state: "start"
@@ -168,6 +128,11 @@ Window {
             duration: 350
             running: box.state == "zasuniete"
         }
+        Flickable {
+            id: listFlickable
+            width: parent.width
+            height: parent.height
+            contentHeight: 1000
 
         Column {
                 spacing: 5
@@ -186,9 +151,9 @@ Window {
                     font.family: robotoMedium.name
                 }
                 ListView {
-                    id: list1
+                    id: pistolsList
                     width: parent.width
-                    height: parent.width/2
+                    //height: parent.width/2
                     maximumFlickVelocity: 2502
                     flickDeceleration: 1497
                     boundsBehavior: Flickable.StopAtBounds
@@ -242,9 +207,9 @@ Window {
                     font.family: robotoMedium.name
                 }
                 ListView {
-                    id: list2
+                    id: riflesList
                     width: parent.width
-                    height: parent.height/4
+                    //height: parent.height/4
                     boundsBehavior: Flickable.StopAtBounds
                     flickableDirection: Flickable.AutoFlickDirection
                     contentHeight: 69
@@ -297,9 +262,9 @@ Window {
                     font.family: robotoMedium.name
                 }
                 ListView {
-                    id: list3
+                    id: heavyList
                     width: parent.width
-                    height: parent.height/2
+                    //height: parent.height/2
                     boundsBehavior: Flickable.StopAtBounds
                     flickableDirection: Flickable.AutoFlickDirection
                     contentHeight: 69
@@ -343,5 +308,46 @@ Window {
                 }
             }
         }
+    }
+    }
+    Rectangle { // Top Bar
+            id: topBar
+            width: parent.width
+            height: 56
+            color: "#03A9F4"
+            anchors.horizontalCenter: parent.horizontalCenter
+            Item {
+                id: itemBar
+                width: parent.height
+                height: parent.height
+                anchors.left: parent.left
+                anchors.leftMargin: 0
+                    Image {
+                        id: imageBar
+                        sourceSize.height: 500
+                        sourceSize.width: 500
+                        fillMode: Image.Stretch
+                        anchors.right: parent.right
+                        anchors.rightMargin: 10
+                        anchors.left: parent.left
+                        anchors.leftMargin: 10
+                        anchors.bottom: parent.bottom
+                        anchors.bottomMargin: 10
+                        anchors.top: parent.top
+                        anchors.topMargin: 10
+                        source: "icons/menu.png"
+                        }
+                        MouseArea {
+                            id: xc
+                            width: parent.width
+                            height: parent.height
+                            onClicked: { box.state = MainScript.openOrClose(box.width, box.state, box.anchors.leftMargin); console.log(MainScript.openOrClose(box.width, box.state, box.anchors.leftMargin))}
+                        }
+                        PaperRipple{
+                            id: ripple
+                            radius: 3 * dp
+                            mouseArea: xc
+                        }
+            }
     }
 }

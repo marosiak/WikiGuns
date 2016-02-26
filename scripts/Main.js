@@ -1,8 +1,20 @@
 var isStartTextExits = true;
-//
 var isMainTextExits = false;
+//
+var pistolsCount    = 3;
+var riflesCount     = 2;
+var heavyCount      = 2;
+
+function calc(){
+    pistolsList.height = 50+(32*pistolsCount);
+    riflesList.height = 50+(32*riflesCount);
+    heavyList.height = 50+(32*heavyCount);
+    listFlickable.contentHeight = (50*3)+(50*3)+(32*riflesCount)+(32*pistolsCount)+(32*heavyCount);
+    mainPlace.contentHeight = 42+mainHeader.height+imageContainer.height+genaralInfo.height+genaralInfo_info.height;
+}
 
 function openOrClose(boxWidth, boxState, boxLeftMargin) {
+    calc();
     if(boxState == "start"){
         boxState = "wysuniete";
     }
@@ -11,6 +23,7 @@ function openOrClose(boxWidth, boxState, boxLeftMargin) {
             boxState = "zasuniete";
         }
         else{ if(boxState == "zasuniete" && boxLeftMargin == (-boxWidth)){
+            listFlickable.contentY = 0;
             boxState = "wysuniete";
             }
         }
