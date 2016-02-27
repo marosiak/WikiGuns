@@ -21,5 +21,11 @@
         <file>imgs/M1911.jpg</file>
         <file>imgs/RPD.png</file>
         <file>imgs/MG42.jpg</file>
+        <file>imgs/STG44.jpg</file>
+        <file>imgs/FN-FAL.jpeg</file>
+        <file>imgs/HK-USP.jpg</file>
+        <file>imgs/PPSh-41.jpg</file>
+        <file>imgs/M249.jpg</file>
+        <file>imgs/THOMPSON.jpg</file>
     </qresource>
 </RCC>

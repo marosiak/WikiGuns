@@ -34,6 +34,7 @@ Window {
         horizontalAlignment: Text.AlignHCenter
         text: "Welcome in my app, thanks for downloading, remember to rate!"
     }
+
     Flickable { // main place
         contentWidth: parent.width
         //contentHeight: mainColumn.height+Screen.height
@@ -91,7 +92,7 @@ Window {
             id: genaralInfo_info
             width: mainPlace.width-(mainPlace.width/5.5)
             textFormat: Text.RichText
-            horizontalAlignment: Text.AlignHCenter
+            horizontalAlignment: Text.AlignJustify
             anchors.top: genaralInfo.bottom
             anchors.topMargin: 27
             anchors.left: parent.left
@@ -106,6 +107,25 @@ Window {
         }
     }
 }
+    Rectangle {
+        id: mainPlaceEffect
+        width: parent.width
+        height: parent.height-topBar.height
+        anchors.top: topBar.bottom
+        color: "transparent"
+        ColorAnimation on color {
+            from: Qt.rgba(33, 33, 33, 0)
+            to: Qt.rgba(33, 33, 33, 0.75)
+            duration: 300
+            running: box.state == "wysuniete"
+        }
+        ColorAnimation on color {
+            from: Qt.rgba(33, 33, 33, 0.75)
+            to: Qt.rgba(33, 33, 33, 0)
+            duration: 300
+            running: box.state == "zasuniete"
+        }
+    }
     Rectangle {
         id: box
         state: "start"

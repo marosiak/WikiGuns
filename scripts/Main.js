@@ -1,11 +1,11 @@
 var isStartTextExits = true;
 var isMainTextExits = false;
 //
-var pistolsCount    = 3;
-var riflesCount     = 2;
-var heavyCount      = 2;
 
 function calc(){
+    var pistolsCount = pistolsList.count;
+    var riflesCount = riflesList.count;
+    var heavyCount = heavyList.count;
     pistolsList.height = 50+(32*pistolsCount);
     riflesList.height = 50+(32*riflesCount);
     heavyList.height = 50+(32*heavyCount);
