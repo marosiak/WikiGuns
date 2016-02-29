@@ -1,15 +1,16 @@
 var isStartTextExits = true;
 var isMainTextExits = false;
+//import "./Sizes.js"
 //
 
 function calc(){
     var pistolsCount = pistolsList.count;
     var riflesCount = riflesList.count;
     var heavyCount = heavyList.count;
-    pistolsList.height = 50+(32*pistolsCount);
-    riflesList.height = 50+(32*riflesCount);
-    heavyList.height = 50+(32*heavyCount);
-    listFlickable.contentHeight = (50*3)+(50*3)+(32*riflesCount)+(32*pistolsCount)+(32*heavyCount);
+    pistolsList.height = 25+(38*pistolsCount);
+    riflesList.height = 25+(38*riflesCount);
+    heavyList.height = 25+(38*heavyCount);
+    listFlickable.contentHeight = (25*3)+(25*3)+(38*riflesCount)+(38*pistolsCount)+(38*heavyCount);
     mainPlace.contentHeight = 42+mainHeader.height+imageContainer.height+genaralInfo.height+genaralInfo_info.height;
 }
 

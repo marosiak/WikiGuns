@@ -27,5 +27,6 @@
         <file>imgs/PPSh-41.jpg</file>
         <file>imgs/M249.jpg</file>
         <file>imgs/THOMPSON.jpg</file>
+        <file>scripts/Sizes.js</file>
     </qresource>
 </RCC>

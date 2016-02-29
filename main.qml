@@ -4,6 +4,7 @@ import QtQuick.Controls 1.4
 import "json"
 import "material"
 import "scripts/Main.js" as MainScript
+import "scripts/Sizes.js" as Size
 
 
 
@@ -28,9 +29,9 @@ Window {
         anchors.right: parent.right
         wrapMode: Text.WordWrap
         textFormat: Text.RichText
-        font.pointSize: 15
+        font.pointSize: Size.startMessage_fontsize
         width: parent.width/1.3
-        height: 10
+        height: 50
         horizontalAlignment: Text.AlignHCenter
         text: "Welcome in my app, thanks for downloading, remember to rate!"
     }
@@ -55,7 +56,7 @@ Window {
             horizontalAlignment: Text.AlignHCenter
             width: parent.width
             font.family: robotoMedium.name
-            font.pointSize: 24
+            font.pointSize: Size.mainHeader;
             color: "#727272"
         }
         Item{
@@ -85,7 +86,7 @@ Window {
             textFormat: Text.RichText
             horizontalAlignment: Text.AlignHCenter
             font.family: robotoMedium.name
-            font.pointSize: 24
+            font.pointSize: Size.generalInfo_fontsize
             color: "#727272"
         }
         Text {
@@ -100,7 +101,7 @@ Window {
             anchors.right: parent.right
             anchors.rightMargin: (mainPlace.width/5.5)/2
             font.family: robotoMedium.name
-            font.pointSize: 12
+            font.pointSize: Size.genaralInfo_info
             color: "#727272"
             //color: "#FFFFFF"
             wrapMode: Text.Wrap
@@ -129,7 +130,7 @@ Window {
     Rectangle {
         id: box
         state: "start"
-        width: 210
+        width: parent.width /1.7
         height: parent.height-topBar.height
         color: "#2196F3"
         anchors.top: topBar.bottom
@@ -167,67 +168,11 @@ Window {
                     width: parent.width
                     font.bold: true
                     horizontalAlignment: Text.AlignHCenter
-                    font.pointSize: 17
+                    font.pointSize: Size.weaponType;
                     font.family: robotoMedium.name
                 }
                 ListView {
                     id: pistolsList
-                    width: parent.width
-                    //height: parent.width/2
-                    maximumFlickVelocity: 2502
-                    flickDeceleration: 1497
-                    boundsBehavior: Flickable.StopAtBounds
-                    flickableDirection: Flickable.AutoFlickDirection
-                    contentHeight: 69
-                    JSONListModel {
-                        id: jsonModel1
-                        query: "$.guns.pistols[*]"
-                        source: "gunsList.txt"
-                    }
-                    model: jsonModel1.model
-                    section.delegate: sectionDelegate
-                    section.property: "name"
-                    section.criteria: ViewSection.FirstCharacter
-                    delegate: Component {
-                        Item{
-                            width: parent.width
-                            height: 30
-                            PaperRipple {
-                                id: ripple
-                                radius: 3 * dp
-                                mouseArea: mouseAreaxx
-                                }
-                            MouseArea {
-                                id: mouseAreaxx
-                                anchors.fill: parent
-                                onClicked: {MainScript.apply(model.name, model.ammo, model.info, model.image);
-                                box.state = MainScript.openOrClose(box.width, box.state, box.anchors.leftMargin); console.log(MainScript.openOrClose(box.width, box.state, box.anchors.leftMargin))}
-                            }
-                            Text {
-                                width: parent.width-25
-                                height: 30
-                                font.pixelSize: 16
-                                color: "white"
-                                font.family: robotoMedium.name
-                                verticalAlignment: Text.AlignVCenter
-                                text: model.name
-                                anchors.left: parent.left
-                                anchors.leftMargin: 36
-                            }
-                        }
-                    }
-                }
-                Text{
-                    color: "#ffffff"
-                    text: "Rifles"
-                    width: parent.width
-                    font.bold: true
-                    horizontalAlignment: Text.AlignHCenter
-                    font.pointSize: 17
-                    font.family: robotoMedium.name
-                }
-                ListView {
-                    id: riflesList
                     width: parent.width
                     //height: parent.height/4
                     boundsBehavior: Flickable.StopAtBounds
@@ -235,7 +180,7 @@ Window {
                     contentHeight: 69
                     JSONListModel {
                         id: jsonModel2
-                        query: "$.guns.rifles[*]"
+                        query: "$.guns.pistols[*]"
                         source: "gunsList.txt"
                     }
                     model: jsonModel2.model
@@ -246,7 +191,7 @@ Window {
 
                         Item{
                             width: parent.width
-                            height: 30
+                            height: Size.listItem_height
                             PaperRipple {
                                 id: ripple
                                 radius: 3 * dp
@@ -260,25 +205,80 @@ Window {
                             }
                             Text {
                                 width: parent.width-25
-                                height: 30
-                                font.pixelSize: 16
+                                height: parent.height
+                                font.pixelSize: Size.listItem_size
                                 color: "white"
                                 font.family: robotoMedium.name
                                 verticalAlignment: Text.AlignVCenter
                                 text: model.name
                                 anchors.left: parent.left
-                                anchors.leftMargin: 36
+                                anchors.leftMargin: 26
                             }
                     }
                 }
             }
                 Text{
                     color: "#ffffff"
-                    text: "Heavy Rifles"
+                    text: "Rifles"
                     width: parent.width
                     font.bold: true
                     horizontalAlignment: Text.AlignHCenter
-                    font.pointSize: 17
+                    font.pointSize: Size.weaponType;
+                    font.family: robotoMedium.name
+                }
+                ListView {
+                    id: riflesList
+                    width: parent.width
+                    //height: parent.height/4
+                    boundsBehavior: Flickable.StopAtBounds
+                    flickableDirection: Flickable.AutoFlickDirection
+                    contentHeight: 69
+                    JSONListModel {
+                        id: jsonModel1
+                        query: "$.guns.rifles[*]"
+                        source: "gunsList.txt"
+                    }
+                    model: jsonModel1.model
+                    section.delegate: sectionDelegate
+                    section.property: "name"
+                    section.criteria: ViewSection.FirstCharacter
+                    delegate: Component {
+
+                        Item{
+                            width: parent.width
+                            height: Size.listItem_height
+                            PaperRipple {
+                                id: ripple
+                                radius: 3 * dp
+                                mouseArea: mouseAreaxc
+                                }
+                            MouseArea {
+                                id: mouseAreaxc
+                                anchors.fill: parent
+                                onClicked: {MainScript.apply(model.name, model.ammo, model.info, model.image);
+                                box.state = MainScript.openOrClose(box.width, box.state, box.anchors.leftMargin); console.log(MainScript.openOrClose(box.width, box.state, box.anchors.leftMargin))}
+                            }
+                            Text {
+                                width: parent.width-25
+                                height: parent.height
+                                font.pixelSize: Size.listItem_size
+                                color: "white"
+                                font.family: robotoMedium.name
+                                verticalAlignment: Text.AlignVCenter
+                                text: model.name
+                                anchors.left: parent.left
+                                anchors.leftMargin: 26
+                            }
+                    }
+                }
+            }
+                Text{
+                    color: "#ffffff"
+                    text: "Heavy"
+                    width: parent.width
+                    font.bold: true
+                    horizontalAlignment: Text.AlignHCenter
+                    font.pointSize: Size.weaponType;
                     font.family: robotoMedium.name
                 }
                 ListView {
@@ -301,7 +301,7 @@ Window {
 
                         Item{
                             width: parent.width
-                            height: 30
+                            height: Size.listItem_height
                             PaperRipple {
                                 id: ripple
                                 radius: 3 * dp
@@ -315,8 +315,8 @@ Window {
                             }
                             Text {
                                 width: parent.width-25
-                                height: 30
-                                font.pixelSize: 16
+                                height: parent.height
+                                font.pixelSize: Size.generalInfo_fontsize
                                 color: "white"
                                 font.family: robotoMedium.name
                                 verticalAlignment: Text.AlignVCenter
@@ -333,7 +333,7 @@ Window {
     Rectangle { // Top Bar
             id: topBar
             width: parent.width
-            height: 56
+            height: mainWindow.height /10
             color: "#03A9F4"
             anchors.horizontalCenter: parent.horizontalCenter
             Item {
