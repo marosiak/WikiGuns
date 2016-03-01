@@ -14,6 +14,13 @@ function calc(){
     mainPlace.contentHeight = 42+mainHeader.height+imageContainer.height+genaralInfo.height+genaralInfo_info.height;
 }
 
+function close(boxWidth, boxState, boxLeftMargin){
+    if(boxState == "wysuniete" && boxLeftMargin == 0){
+        boxState = "zasuniete";
+    }
+    return boxState;
+}
+
 function openOrClose(boxWidth, boxState, boxLeftMargin) {
     calc();
     if(boxState == "start"){

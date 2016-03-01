@@ -117,14 +117,19 @@ Window {
         ColorAnimation on color {
             from: Qt.rgba(33, 33, 33, 0)
             to: Qt.rgba(33, 33, 33, 0.75)
-            duration: 300
+            duration: 310
             running: box.state == "wysuniete"
         }
         ColorAnimation on color {
             from: Qt.rgba(33, 33, 33, 0.75)
             to: Qt.rgba(33, 33, 33, 0)
-            duration: 300
+            duration: 310
             running: box.state == "zasuniete"
+        }
+        MouseArea{
+            width: parent.width
+            height: parent.height
+            onClicked: box.state = MainScript.close(box.width, box.state, box.anchors.leftMargin);
         }
     }
     Rectangle {
@@ -140,13 +145,13 @@ Window {
         NumberAnimation on anchors.leftMargin {
             from: -box.width
             to: 0
-            duration: 350
+            duration: 310
             running: box.state == "wysuniete"
         }
         NumberAnimation on anchors.leftMargin {
             from: 0
             to: -box.width
-            duration: 350
+            duration: 310
             running: box.state == "zasuniete"
         }
         Flickable {
