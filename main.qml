@@ -35,7 +35,6 @@ Window {
         horizontalAlignment: Text.AlignHCenter
         text: "Welcome in my app, thanks for downloading, remember to rate!"
     }
-
     Flickable { // main place
         contentWidth: parent.width
         //contentHeight: mainColumn.height+Screen.height
@@ -108,11 +107,22 @@ Window {
         }
     }
 }
+    MouseArea {
+        id: hotLeft
+        width: parent.width / 11
+        height: parent.height-topBar.height
+        onClicked: box.state = MainScript.openOrClose(box.width, box.state, box.anchors.leftMargin)
+        anchors.top: topBar.bottom
+        anchors.left: parent.left
+        anchors.leftMargin: 0
+        }
     Rectangle {
+        visible: false
         id: mainPlaceEffect
-        width: parent.width
+        width: parent.width-hotLeft.width
         height: parent.height-topBar.height
         anchors.top: topBar.bottom
+        anchors.right: parent.right;
         color: "transparent"
         ColorAnimation on color {
             from: Qt.rgba(33, 33, 33, 0)
@@ -129,7 +139,7 @@ Window {
         MouseArea{
             width: parent.width
             height: parent.height
-            onClicked: box.state = MainScript.close(box.width, box.state, box.anchors.leftMargin);
+            onClicked: {if(box.state == "wysuniete"){box.state = MainScript.openOrClose(box.width, box.state, box.anchors.leftMargin)}}
         }
     }
     Rectangle {
@@ -375,4 +385,5 @@ Window {
                         }
             }
     }
+
 }
