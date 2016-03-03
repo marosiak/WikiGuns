@@ -3,6 +3,11 @@ var isMainTextExits = false;
 //import "./Sizes.js"
 //
 
+function onLoad(){
+    calc();
+
+}
+
 function calc(){
     var pistolsCount = pistolsList.count;
     var riflesCount = riflesList.count;
@@ -35,6 +40,7 @@ function openOrClose(boxWidth, boxState, boxLeftMargin) {
     return boxState;
 }
 function checkRemove(){
+    calc();
     if(isStartTextExits){
         startInfo.destroy();
         isStartTextExits = false;
@@ -42,6 +48,7 @@ function checkRemove(){
 }
 
 function apply(Name, Ammo, Info, Image){
+    calc();
     checkRemove();
     mainHeader.text = qsTr(Name);
     gunImage.source = qsTr("../imgs/"+Image);

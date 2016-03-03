@@ -13,6 +13,7 @@ Window {
     visible: true
     width: 400
     height: 600
+    Component.onCompleted: MainScript.onLoad()
     FontLoader {
             id: robotoMedium
             source: "/fonts/Roboto-Medium.ttf"
@@ -351,6 +352,7 @@ Window {
             height: mainWindow.height /10
             color: "#03A9F4"
             anchors.horizontalCenter: parent.horizontalCenter
+
             Item {
                 id: itemBar
                 width: parent.height
@@ -383,7 +385,6 @@ Window {
                             radius: 3 * dp
                             mouseArea: xc
                         }
-            }
+                }
     }
-
 }

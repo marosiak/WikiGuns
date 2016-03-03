@@ -28,5 +28,6 @@
         <file>imgs/M249.jpg</file>
         <file>imgs/THOMPSON.jpg</file>
         <file>scripts/Sizes.js</file>
+        <file>imgs/Glock17.jpg</file>
     </qresource>
 </RCC>
