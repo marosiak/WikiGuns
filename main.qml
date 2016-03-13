@@ -13,11 +13,10 @@ Window {
     visible: true
     width: 400
     height: 600
-    Component.onCompleted: MainScript.onLoad()
     FontLoader {
-            id: robotoMedium
-            source: "/fonts/Roboto-Medium.ttf"
-        }
+        id: robotoMedium
+        source: "/fonts/Roboto-Medium.ttf"
+    }
     Text {
         id: startInfo
         color: "#727272"
@@ -29,16 +28,19 @@ Window {
         anchors.rightMargin: 10
         anchors.right: parent.right
         wrapMode: Text.WordWrap
-        textFormat: Text.RichText
         font.pointSize: Size.startMessage_fontsize
         width: parent.width/1.3
         height: 50
         horizontalAlignment: Text.AlignHCenter
-        text: "Welcome in my app, thanks for downloading, remember to rate!"
+        Component.onCompleted: {
+            MainScript.onLoad();
+            RandomQuotes.doQuote();
+            startInfo.text = RandomQuotes.getQuote();
+            console.log(RandomQuotes.quote);
+        }
     }
     Flickable { // main place
         contentWidth: parent.width
-        //contentHeight: mainColumn.height+Screen.height
         id: mainPlace
         width: parent.width
         height: parent.height-topBar.height
@@ -48,66 +50,66 @@ Window {
             id: mainColumn
             spacing: 2
             width: parent.width
-        Text {
-            id: mainHeader
-            anchors.top: startInfo.top
-            anchors.topMargin: 3
-            textFormat: Text.RichText
-            horizontalAlignment: Text.AlignHCenter
-            width: parent.width
-            font.family: robotoMedium.name
-            font.pointSize: Size.mainHeader;
-            color: "#727272"
-        }
-        Item{
-            id: imageContainer
-            width: parent.width/2.5
-            height: parent.width/2.5
-            anchors.top: mainHeader.bottom
-            anchors.topMargin: 1
-            anchors.horizontalCenter: parent.horizontalCenter
-            Image {
-                id: gunImage
+            Text {
+                id: mainHeader
+                anchors.top: startInfo.top
+                anchors.topMargin: 3
+                textFormat: Text.RichText
+                horizontalAlignment: Text.AlignHCenter
                 width: parent.width
-                height: parent.height
-                fillMode: Image.PreserveAspectFit
-                //
+                font.family: robotoMedium.name
+                font.pointSize: Size.mainHeader;
+                color: "#727272"
+            }
+            Item{
+                id: imageContainer
+                width: parent.width/2.5
+                height: parent.width/2.5
                 anchors.top: mainHeader.bottom
-                anchors.topMargin: 5
+                anchors.topMargin: 1
                 anchors.horizontalCenter: parent.horizontalCenter
+                Image {
+                    id: gunImage
+                    width: parent.width
+                    height: parent.height
+                    fillMode: Image.PreserveAspectFit
+                    //
+                    anchors.top: mainHeader.bottom
+                    anchors.topMargin: 5
+                    anchors.horizontalCenter: parent.horizontalCenter
 
+                }
+            }
+            Text {
+                id: genaralInfo
+                width: mainPlace.width
+                anchors.top: imageContainer.bottom
+                anchors.topMargin: 3
+                textFormat: Text.RichText
+                horizontalAlignment: Text.AlignHCenter
+                font.family: robotoMedium.name
+                font.pointSize: Size.generalInfo_fontsize
+                color: "#727272"
+            }
+            Text {
+                id: genaralInfo_info
+                width: mainPlace.width-(mainPlace.width/5.5)
+                textFormat: Text.RichText
+                horizontalAlignment: Text.AlignJustify
+                anchors.top: genaralInfo.bottom
+                anchors.topMargin: 27
+                anchors.left: parent.left
+                anchors.leftMargin: (mainPlace.width/5.5)/2
+                anchors.right: parent.right
+                anchors.rightMargin: (mainPlace.width/5.5)/2
+                font.family: robotoMedium.name
+                font.pointSize: Size.genaralInfo_info
+                color: "#727272"
+                //color: "#FFFFFF"
+                wrapMode: Text.Wrap
             }
         }
-        Text {
-            id: genaralInfo
-            width: mainPlace.width
-            anchors.top: imageContainer.bottom
-            anchors.topMargin: 3
-            textFormat: Text.RichText
-            horizontalAlignment: Text.AlignHCenter
-            font.family: robotoMedium.name
-            font.pointSize: Size.generalInfo_fontsize
-            color: "#727272"
-        }
-        Text {
-            id: genaralInfo_info
-            width: mainPlace.width-(mainPlace.width/5.5)
-            textFormat: Text.RichText
-            horizontalAlignment: Text.AlignJustify
-            anchors.top: genaralInfo.bottom
-            anchors.topMargin: 27
-            anchors.left: parent.left
-            anchors.leftMargin: (mainPlace.width/5.5)/2
-            anchors.right: parent.right
-            anchors.rightMargin: (mainPlace.width/5.5)/2
-            font.family: robotoMedium.name
-            font.pointSize: Size.genaralInfo_info
-            color: "#727272"
-            //color: "#FFFFFF"
-            wrapMode: Text.Wrap
-        }
     }
-}
     MouseArea {
         id: hotLeft
         width: parent.width / 11
@@ -116,7 +118,7 @@ Window {
         anchors.top: topBar.bottom
         anchors.left: parent.left
         anchors.leftMargin: 0
-        }
+    }
     Rectangle {
         visible: false
         id: mainPlaceEffect
@@ -171,7 +173,7 @@ Window {
             height: parent.height
             contentHeight: 1000
 
-        Column {
+            Column {
                 spacing: 5
                 anchors.fill: parent
                 anchors.margins: 5
@@ -190,7 +192,6 @@ Window {
                 ListView {
                     id: pistolsList
                     width: parent.width
-                    //height: parent.height/4
                     boundsBehavior: Flickable.StopAtBounds
                     flickableDirection: Flickable.AutoFlickDirection
                     contentHeight: 69
@@ -212,12 +213,12 @@ Window {
                                 id: ripple
                                 radius: 3 * dp
                                 mouseArea: mouseAreaxx
-                                }
+                            }
                             MouseArea {
                                 id: mouseAreaxx
                                 anchors.fill: parent
                                 onClicked: {MainScript.apply(model.name, model.ammo, model.info, model.image);
-                                box.state = MainScript.openOrClose(box.width, box.state, box.anchors.leftMargin); console.log(MainScript.openOrClose(box.width, box.state, box.anchors.leftMargin))}
+                                    box.state = MainScript.openOrClose(box.width, box.state, box.anchors.leftMargin); console.log(MainScript.openOrClose(box.width, box.state, box.anchors.leftMargin))}
                             }
                             Text {
                                 width: parent.width-25
@@ -230,9 +231,9 @@ Window {
                                 anchors.left: parent.left
                                 anchors.leftMargin: 26
                             }
+                        }
                     }
                 }
-            }
                 Text{
                     color: "#ffffff"
                     text: "Rifles"
@@ -245,7 +246,6 @@ Window {
                 ListView {
                     id: riflesList
                     width: parent.width
-                    //height: parent.height/4
                     boundsBehavior: Flickable.StopAtBounds
                     flickableDirection: Flickable.AutoFlickDirection
                     contentHeight: 69
@@ -267,12 +267,12 @@ Window {
                                 id: ripple
                                 radius: 3 * dp
                                 mouseArea: mouseAreaxc
-                                }
+                            }
                             MouseArea {
                                 id: mouseAreaxc
                                 anchors.fill: parent
                                 onClicked: {MainScript.apply(model.name, model.ammo, model.info, model.image);
-                                box.state = MainScript.openOrClose(box.width, box.state, box.anchors.leftMargin); console.log(MainScript.openOrClose(box.width, box.state, box.anchors.leftMargin))}
+                                    box.state = MainScript.openOrClose(box.width, box.state, box.anchors.leftMargin); console.log(MainScript.openOrClose(box.width, box.state, box.anchors.leftMargin))}
                             }
                             Text {
                                 width: parent.width-25
@@ -285,9 +285,9 @@ Window {
                                 anchors.left: parent.left
                                 anchors.leftMargin: 26
                             }
+                        }
                     }
                 }
-            }
                 Text{
                     color: "#ffffff"
                     text: "Heavy"
@@ -300,7 +300,6 @@ Window {
                 ListView {
                     id: heavyList
                     width: parent.width
-                    //height: parent.height/2
                     boundsBehavior: Flickable.StopAtBounds
                     flickableDirection: Flickable.AutoFlickDirection
                     contentHeight: 69
@@ -322,12 +321,12 @@ Window {
                                 id: ripple
                                 radius: 3 * dp
                                 mouseArea: mouseAreaxx
-                                }
+                            }
                             MouseArea {
                                 id: mouseAreaxx
                                 anchors.fill: parent
                                 onClicked: {MainScript.apply(model.name, model.ammo, model.info, model.image);
-                                box.state = MainScript.openOrClose(box.width, box.state, box.anchors.leftMargin); console.log(MainScript.openOrClose(box.width, box.state, box.anchors.leftMargin))}
+                                    box.state = MainScript.openOrClose(box.width, box.state, box.anchors.leftMargin); console.log(MainScript.openOrClose(box.width, box.state, box.anchors.leftMargin))}
                             }
                             Text {
                                 width: parent.width-25
@@ -340,51 +339,51 @@ Window {
                                 anchors.left: parent.left
                                 anchors.leftMargin: 36
                             }
+                        }
                     }
                 }
             }
         }
     }
-    }
     Rectangle { // Top Bar
-            id: topBar
-            width: parent.width
-            height: mainWindow.height /10
-            color: "#03A9F4"
-            anchors.horizontalCenter: parent.horizontalCenter
+        id: topBar
+        width: parent.width
+        height: mainWindow.height /10
+        color: "#03A9F4"
+        anchors.horizontalCenter: parent.horizontalCenter
 
-            Item {
-                id: itemBar
-                width: parent.height
-                height: parent.height
+        Item {
+            id: itemBar
+            width: parent.height
+            height: parent.height
+            anchors.left: parent.left
+            anchors.leftMargin: 0
+            Image {
+                id: imageBar
+                sourceSize.height: 500
+                sourceSize.width: 500
+                fillMode: Image.Stretch
+                anchors.right: parent.right
+                anchors.rightMargin: 10
                 anchors.left: parent.left
-                anchors.leftMargin: 0
-                    Image {
-                        id: imageBar
-                        sourceSize.height: 500
-                        sourceSize.width: 500
-                        fillMode: Image.Stretch
-                        anchors.right: parent.right
-                        anchors.rightMargin: 10
-                        anchors.left: parent.left
-                        anchors.leftMargin: 10
-                        anchors.bottom: parent.bottom
-                        anchors.bottomMargin: 10
-                        anchors.top: parent.top
-                        anchors.topMargin: 10
-                        source: "icons/menu.png"
-                        }
-                        MouseArea {
-                            id: xc
-                            width: parent.width
-                            height: parent.height
-                            onClicked: { box.state = MainScript.openOrClose(box.width, box.state, box.anchors.leftMargin); console.log(MainScript.openOrClose(box.width, box.state, box.anchors.leftMargin))}
-                        }
-                        PaperRipple{
-                            id: ripple
-                            radius: 3 * dp
-                            mouseArea: xc
-                        }
-                }
+                anchors.leftMargin: 10
+                anchors.bottom: parent.bottom
+                anchors.bottomMargin: 10
+                anchors.top: parent.top
+                anchors.topMargin: 10
+                source: "icons/menu.png"
+            }
+            MouseArea {
+                id: xc
+                width: parent.width
+                height: parent.height
+                onClicked: { box.state = MainScript.openOrClose(box.width, box.state, box.anchors.leftMargin); console.log(MainScript.openOrClose(box.width, box.state, box.anchors.leftMargin))}
+            }
+            PaperRipple{
+                id: ripple
+                radius: 3 * dp
+                mouseArea: xc
+            }
+        }
     }
 }

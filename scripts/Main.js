@@ -15,7 +15,7 @@ function calc(){
     pistolsList.height = 25+(38*pistolsCount);
     riflesList.height = 25+(38*riflesCount);
     heavyList.height = 25+(38*heavyCount);
-    listFlickable.contentHeight = (25*3)+(25*3)+(38*riflesCount)+(38*pistolsCount)+(38*heavyCount);
+    listFlickable.contentHeight = (30*3)+(30*3)+(42*riflesCount)+(42*pistolsCount)+(42*heavyCount);
     mainPlace.contentHeight = 42+mainHeader.height+imageContainer.height+genaralInfo.height+genaralInfo_info.height;
 }
 
@@ -31,9 +31,9 @@ function openOrClose(boxWidth, boxState, boxLeftMargin) {
             mainPlaceEffect.visible = false;
         }
         else{ if(boxState == "zasuniete" && boxLeftMargin == (-boxWidth)){
-            listFlickable.contentY = 0;
-            boxState = "wysuniete";
-            mainPlaceEffect.visible = true;
+                listFlickable.contentY = 0;
+                boxState = "wysuniete";
+                mainPlaceEffect.visible = true;
             }
         }
     }

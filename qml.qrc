@@ -29,5 +29,8 @@
         <file>imgs/THOMPSON.jpg</file>
         <file>scripts/Sizes.js</file>
         <file>imgs/Glock17.jpg</file>
+        <file>imgs/HK-P30.jpg</file>
+        <file>imgs/Dragunow.jpg</file>
+        <file>imgs/SIG-Sauer-p226.jpg</file>
     </qresource>
 </RCC>
